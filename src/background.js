@@ -14,8 +14,9 @@ async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 340,
-    height: 480,
+    height: 520,
     frame: false,
+    resizable: false,//可否缩放
     webPreferences: {
       
       // Use pluginOptions.nodeIntegration, leave this alone
@@ -34,6 +35,10 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
+
+  //引入ipcMain
+  console.log("I am here 1.1")
+  // require('./icpMain.js');
 }
 
 // Quit when all windows are closed.

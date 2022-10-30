@@ -1,6 +1,8 @@
 <template>
-    <div>
+    <div class="kcall-wrap">
+        <MyHeader/>
         <div class="web-phone-wrap">
+
             <el-tabs v-model="activeTabsName" @tab-click="handleTabsClick">
                 <el-tab-pane label="拨号盘" name="first" style="height: 400px">
                     <el-row type="flex" justify="center">
@@ -83,6 +85,8 @@
 
 <script>
 import axios from "axios";
+import MyHeader from '../components/MyHeader.vue';
+
 
 var outgoingSession = null;
 var incomingSession = null;
@@ -206,6 +210,10 @@ export default {
             call_id: "",
         };
     },
+    components: {
+          MyHeader,
+          // QualityCheck,
+      },
     created() {
         let that = this;
 
@@ -1290,14 +1298,18 @@ Date.prototype.Format = function (fmt) {
     return fmt;
 };
 </script>
-<style>
+<style lang="scss">
 div {
     text-align: left;
 }
+
+.kcall-wrap{
+    border-radius: 4px;
+}
+
 .web-phone-wrap {
     background-color: lightgray;
     padding: 20px;
-    border-radius: 4px;
     width: 300px;
 }
 
