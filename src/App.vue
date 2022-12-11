@@ -1,43 +1,39 @@
 <template>
-  <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <CallPad></CallPad>
-  </div>
+    <div id="app">
+        <transition name="move" mode="out-in">
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </transition>
+    </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import CallPad from './components/CallPad.vue'
+import axios from "axios";
 
 export default {
-  name: 'App',
-  components: {
-    CallPad
-  }
-}
+    name: "App",
+};
+
+// window.onbeforeunload = function (e) {
+//   axios
+//   .post("/api/logout", {
+//       user: localStorage.getItem("user"),
+//   })
+//   .then(function (response) {
+//       var res = response.data;
+//       if (res.code != 0) {
+//           alert(res.msg);
+//       } else {
+//           console.log("logout success.")
+//       }
+//       })
+//   .catch(function (error) {
+//       alert(error);
+//   });
+// };
 </script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body,
-#app,
-.wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+    @import "./assets/css/main.css";
 </style>
