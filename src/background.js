@@ -16,13 +16,14 @@ async function createWindow() {
     width: 1080,
     height: 720,
     frame: false,
-    resizable: false,//可否缩放
+    resizable: true,//可否缩放
     webPreferences: {
       
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
+      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      enableRemoteModule: true
     }
   })
 
@@ -38,7 +39,7 @@ async function createWindow() {
 
   //引入ipcMain
   console.log("I am here 1.1")
-  // require('./icpMain.js');
+  // require('./ipcMain.js');
 }
 
 // Quit when all windows are closed.

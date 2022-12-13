@@ -1,11 +1,16 @@
 <template>
     <div class="header" :class="{'header-collapse':collapse}">
         <div class="header-right">
+            <span class="el-icon-minus" @click="minimizeWin"></span>
+            <span class="el-icon-full-screen" @click="maximizeWin"></span>
+            <span class="el-icon-close" @click="closeWin"></span>
         </div>
     </div>
 </template>
 <script>
 import bus from "../components/bus";
+import { remote } from "electron";
+
 export default {
     data() {
         return {
@@ -41,6 +46,25 @@ export default {
             this.collapse = !this.collapse;
             bus.$emit("collapse", this.collapse);
         },
+
+        // 最小化窗口
+        minimizeWin() {
+            remote.getCurrentWindow().minimize(); // 窗口最小化
+        },
+        // 最大化窗口
+        maximizeWin() {
+            const win = remote.getCurrentWindow();
+            if (win.isMaximized()) {
+                win.restore(); // 恢复原窗口大小
+            } else {
+                win.maximize(); //最大化窗口
+            }
+        },
+        // 关闭窗口
+        closeWin() {
+            console.log("close win.")
+            remote.getCurrentWindow().close(); // 关闭窗口，也结束了所有进程
+        },
     },
     mounted() {
         if (document.body.clientWidth < 1500) {
@@ -60,8 +84,12 @@ export default {
     color: #fff;
     -webkit-transition: left 0.3s ease-in-out;
     transition: left 0.3s ease-in-out;
-    background-color:#1f2435;
+    background-color: #1f2435;
     -webkit-app-region: drag;
+}
+
+.el-icon-minus:hover{
+    /* background-color: gray; */
 }
 
 .collapse-btn {
@@ -78,7 +106,15 @@ export default {
 }
 .header-right {
     float: right;
-    padding-right: 50px;
+    line-height: 45px;
+    -webkit-app-region: no-drag;
+    /* padding-right: 50px; */
+}
+
+.header-right span {
+    font-size: 20px;
+    margin-right: 20px;
+    height: 45px;
 }
 .header-user-con {
     display: flex;
